@@ -12,7 +12,7 @@ sudo hwclock --systohc
 sudo reflector -c Belgium -a 6 --sort rate --save /etc/pacman.d/mirrorlist
 
 #Install packages
-sudo pacman -S xorg xorg-server xorg-xinit git firefox pcmanfm slock sxiv nitrogen picom ranger neofetch imagemagick htop gvim cmatrix alacritty alsa-utils
+sudo pacman -S xorg xorg-server xorg-xinit git firefox pcmanfm slock sxiv nitrogen picom ranger neofetch imagemagick htop gvim cmatrix alacritty
 
 #Reset home folders
 cd
