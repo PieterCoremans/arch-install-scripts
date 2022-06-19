@@ -1,13 +1,17 @@
 #!/bin/bash
 
 #Note: before running this script, make sure you have already 
-#1) checked internet acces
+#1) checked internet acces and ran loadkeys be-latin1 for Belgian layout
 #2) ran 'timedatectl set-ntp true'
 #3) partitioned the drives and mounted them
 #4) ran 'pactrap /mnt base base-devel linux linux-firmware vim git
 #5) ran 'genfstab -U /mnt >> /mnt/etc/fstab
+#6) ran 'arch-root /mnt /bin/bash'. This will put you in system root
 
-#6) adapted this file for the installation needs
+######################################
+#Set up the variables for this script#
+######################################
+
 timezone="/Europe/Brussels"
 
 #passwords of root and user

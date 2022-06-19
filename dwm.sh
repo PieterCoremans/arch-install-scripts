@@ -6,15 +6,18 @@
 #2) make this file executable with chmod +x
 
 #Preliminary steps
+echo "Setting clock and mirrorlist"
 sudo timedatectl set-ntp true
 sudo hwclock --systohc
 
 sudo reflector -c Belgium -a 6 --sort rate --save /etc/pacman.d/mirrorlist
 
 #Install packages
+echo "Installing pacman packages"
 sudo pacman -S xorg xorg-server xorg-xinit git firefox pcmanfm slock sxiv nitrogen picom ranger neofetch imagemagick htop gvim cmatrix alacritty
 
 #Reset home folders
+echo "Deleting .config and .local folders if they exist"
 cd
 
 if [ -d .config ]; then
@@ -26,7 +29,10 @@ if [ -d .local ]; then
 fi
 
 #Clone config github directories
+echo "Cloning .config folder"
 git clone https://github.com/PieterCoremans/config.git .config
+
+echo "Installing suckless utilities: DWM, st, slstatus and dmenu"
 cd .config
 mkdir suckless
 cd suckless
@@ -52,5 +58,6 @@ make && sudo make install
 cd 
 
 #Clone local github directories
+echo "Cloning .local folder"
 git clone https://github.com/PieterCoremans/local.git .local
 
