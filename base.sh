@@ -38,7 +38,9 @@ sys_stuff=(NetworkManager)
 ##############
 
 #General
-echo "Setting locale settings, hostname and root password"
+printf "\e[1;32mSetting locale settings, hostname and root password.\e[0m"
+sleep 2s
+
 ln -sf /usr/share/zoneinfo/$timezone /etc/localtime
 hwclock --systohc
 sed -i '178s/.//' /etc/locale.gen
@@ -52,11 +54,15 @@ echo "127.0.0.1 arch.localdomain arch" >> /etc/hosts
 echo root:$password_root | chpasswd
 
 #Pacman packages
-echo "Installing pacman packages"
+printf "\e[1;32mInstalling pacman packages.\e[0m"
+sleep 2s
+
 pacman -S --noconfirm ${packages[@]}
 
 #Video drivers
-echo "Installing video drivers"
+printf "\e[1;32mInstalling video drivers.\e[0m"
+sleep 2s
+
 case $video in
         intel) pacman -S --noconfirm xf86-video-intel;;
         amd) pacman -S --noconfirm xf86-video-amdgpu;;
@@ -65,7 +71,9 @@ case $video in
 esac
 
 #GRUB
-echo "Installing GRUB"
+printf "\e[1;32mInstalling GRUB.\e[0m"
+sleep 2s
+
 case $install_type in
         bios) grub-install $bios_install_disk;;
         uefi) grub-install --target=x86_64-efi --efi-directory=$uefi_mount --bootloader-id=GRUB;; 
@@ -75,14 +83,17 @@ esac
 grub-mkconfig -o /boot/grub/grub.cfg
 
 #Systemd
-echo "Enabling systemctl configuration"
+printf "\e[1;32mEnabling systemctl configuration.\e[0m"
+sleep 2s
+
 for x in ${sys_stuff[@]}
 do
-        systemctl enable x
+        systemctl enable $x
 done
 
 #User
-echo "Setting user settings"
+printf "\e[1;32mSetting user settings.\e[0m"
+sleep 2s
 
 #Original user management
 #useradd -m pieter
@@ -94,7 +105,7 @@ echo "Setting user settings"
 useradd -mg wheel $name_user
 echo ${name_user}:$password_user | chpasswd
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
-echo "Defaults !tty-tickets" >> /etc/sudoers
+echo "Defaults !tty_tickets" >> /etc/sudoers
 
 
 printf "\e[1;32mDone! Type exit, umount -R /mnt  and reboot.\e[0m"
