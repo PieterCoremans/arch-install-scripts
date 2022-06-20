@@ -6,18 +6,24 @@
 #2) make this file executable with chmod +x
 
 #Preliminary steps
-echo "Setting clock and mirrorlist"
+printf "\e[1;32mSetting clock and mirrorlist.\e[0m"
+sleep 2s
+
 sudo timedatectl set-ntp true
 sudo hwclock --systohc
 
 sudo reflector -c Belgium -a 6 --sort rate --save /etc/pacman.d/mirrorlist
 
 #Install packages
-echo "Installing pacman packages"
+printf "\e[1;32mInstalling pacman packages.\e[0m"
+sleep 2s
+
 sudo pacman -S xorg xorg-server xorg-xinit git firefox pcmanfm slock sxiv nitrogen picom ranger neofetch imagemagick htop gvim cmatrix alacritty
 
 #Reset home folders
-echo "Deleting .config and .local folders if they exist"
+printf "\e[1;32mDeleting .config and .local folders if they exist.\e[0m"
+sleep 2s
+
 cd
 
 if [ -d .config ]; then
@@ -29,11 +35,17 @@ if [ -d .local ]; then
 fi
 
 #Clone config github directories
-echo "Cloning .config folder"
-git clone https://github.com/PieterCoremans/config.git .config
+printf "\e[1;32mCloning .config folder and making symlinks.\e[0m"
+sleep 2s
 
-echo "Installing suckless utilities: DWM, st, slstatus and dmenu"
+git clone https://github.com/PieterCoremans/config.git .config
 cd .config
+chmod +x symlinks
+./ symlinks
+
+printf "\e[1;32mInstalling suckless utilities: DWM, st, slstatus and dmenu.\e[0m"
+sleep 2s
+
 mkdir suckless
 cd suckless
 
@@ -58,6 +70,9 @@ make && sudo make install
 cd 
 
 #Clone local github directories
-echo "Cloning .local folder"
+printf "\e[1;32mCloning .local folder.\e[0m"
+sleep 2s
+
 git clone https://github.com/PieterCoremans/local.git .local
 
+printf "\e[1;32mDWM and other utilities have now been installed! Reboot to login into your new window manager :)!.\e[0m"
