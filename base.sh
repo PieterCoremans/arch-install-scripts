@@ -24,7 +24,7 @@ read -p "Did you run these steps (yes/no)?" ran_prelim
 
 case $ran_prelim in
         yes) echo "Alright, let continue the script!";;
-        no) echo "Oh, that we stop you right there. Please run these steps before continuing. This script will now quit." && sleep 3s && exit 1;;
+        no) echo "Oh, that we stop you right there. Please run these steps before continuing. This script will now quit." && sleep 2s && exit 1;;
         *) echo "please type yes or no" && run_script;;
 esac
 }
