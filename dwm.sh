@@ -87,15 +87,15 @@ esac
 
 git_dwnlds
 
-printf "\e[1;32mCloning .config folder and making symlinks.\e[0m"
+printf "\e[1;32mCloning .config folder and making links.\e[0m"
 sleep 2s
 
 cd
 
 git clone https://github.com/PieterCoremans/config.git .config
 cd .config
-chmod +x symlinks
-./symlinks
+chmod +x links.sh
+./links.sh
 
 printf "\e[1;32mInstalling suckless utilities: DWM, st, slstatus and dmenu.\e[0m"
 sleep 2s
