@@ -4,13 +4,14 @@
 #Preliminary steps#
 ###################
 
-echo -e \
-"Hello there!
+printf "\e[1;32mHello there!
 
 This script will perform a base install of Arch Linux. 
 Before continuing, make sure you performed the following steps:
+\e[0m"
 
-1) checked internet acces and ran loadkeys be-latin1 for Belgian layout
+echo -e \
+"1) checked internet acces and ran loadkeys be-latin1 for Belgian layout
 2) ran 'timedatectl set-ntp true'
 3) partitioned the drives and mounted them
 4) ran 'pactrap /mnt base base-devel linux linux-firmware vim git
@@ -192,6 +193,9 @@ useradd -mg wheel $name_user
 echo ${name_user}:$password_user | chpasswd
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 echo "Defaults !tty_tickets" >> /etc/sudoers
+
+cd /
+mv arch-install-scripts /home/${name_user}/
 
 printf "\e[1;32mDone! Type exit, umount -R /mnt  and reboot.\e[0m"
 

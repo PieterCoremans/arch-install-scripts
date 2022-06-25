@@ -4,13 +4,14 @@
 #Preliminary steps#
 ###################
 
-echo -e \
-"Hello there again!
+printf "\e[1;32mHello there again!
 
 This script will install all the .config files and .local files for a functioning dwm install
 Before running this script:
+\e[0m"
 
-1) make sure you already ran base.sh with the prerequisites for that script
+echo -e \
+"1) make sure you already ran base.sh with the prerequisites for that script
 2) read through the script and adapt what's needed
 3) make this file executable with chmod +x
 
