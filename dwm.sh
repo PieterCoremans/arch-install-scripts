@@ -102,8 +102,6 @@ cd .config
 chmod +x links.sh
 ./links.sh
 
-sudo echo "%wheel ALL=(ALL) NOPASSWD:$HOME/.local/bin/shutdown_prompt" >> /etc/sudoers
-
 printf "\e[1;32mInstalling suckless utilities: DWM, st, slstatus and dmenu.
 \e[0m"
 sleep 2s
