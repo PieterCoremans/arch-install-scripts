@@ -34,7 +34,8 @@ run_script
 ############
 
 #Preliminary settings
-printf "\e[1;32mSetting clock and mirrorlist.\e[0m"
+printf "\e[1;32mSetting clock and mirrorlist.
+\e[0m"
 sleep 2s
 
 sudo timedatectl set-ntp true
@@ -43,7 +44,8 @@ sudo hwclock --systohc
 sudo reflector -c Belgium -a 6 --sort rate --save /etc/pacman.d/mirrorlist
 
 #Install packages
-printf "\e[1;32mInstalling pacman packages.\e[0m"
+printf "\e[1;32mInstalling pacman packages.
+\e[0m"
 sleep 2s
 
 sudo pacman -S xorg xorg-server xorg-xinit git firefox pcmanfm slock sxiv nitrogen picom ranger neofetch imagemagick htop gvim cmatrix alacritty
@@ -62,7 +64,8 @@ esac
 
 reset_folders
 
-printf "\e[1;32mDeleting .config and .local folders if they exist.\e[0m"
+printf "\e[1;32mDeleting .config and .local folders if they exist.
+\e[0m"
 sleep 2s
 
 cd
@@ -88,7 +91,8 @@ esac
 
 git_dwnlds
 
-printf "\e[1;32mCloning .config folder and making links.\e[0m"
+printf "\e[1;32mCloning .config folder and making links.
+\e[0m"
 sleep 2s
 
 cd
@@ -98,7 +102,10 @@ cd .config
 chmod +x links.sh
 ./links.sh
 
-printf "\e[1;32mInstalling suckless utilities: DWM, st, slstatus and dmenu.\e[0m"
+sudo echo "%wheel ALL=(ALL) NOPASSWD:$HOME/.local/bin/shutdown_prompt" >> /etc/sudoers
+
+printf "\e[1;32mInstalling suckless utilities: DWM, st, slstatus and dmenu.
+\e[0m"
 sleep 2s
 
 mkdir suckless
@@ -126,9 +133,11 @@ make && sudo make install
 cd 
 
 #Clone local github directories
-printf "\e[1;32mCloning .local folder.\e[0m"
+printf "\e[1;32mCloning .local folder.
+\e[0m"
 sleep 2s
 
 git clone https://github.com/PieterCoremans/local.git .local
 
-printf "\e[1;32mDWM and other utilities have now been installed! Reboot to login into your new window manager :)!.\e[0m"
+printf "\e[1;32mDWM and other utilities have now been installed! Reboot to login into your new window manager :)!.
+\e[0m"
