@@ -48,7 +48,7 @@ printf "\e[1;32mInstalling pacman packages.
 \e[0m"
 sleep 2s
 
-sudo pacman -S xorg xorg-server xorg-xinit git firefox pcmanfm slock sxiv nitrogen picom ranger neofetch imagemagick htop gvim cmatrix alacritty
+sudo pacman -S xorg-server xorg-xinit xorg-randr xorg-xsetroot git firefox pcmanfm slock sxiv nitrogen picom ranger neofetch imagemagick htop gvim cmatrix alacritty go-md2man
 
 #Reset home folders
 reset_folders (){
@@ -127,6 +127,10 @@ cd ..
 git clone https://github.com/PieterCoremans/dmenu.git
 cd dmenu
 make && sudo make install
+
+git clone https://gitlab.com/cameronnemo/brillo.git
+cd brillo
+make && sudo make install.setgid
 
 cd 
 
