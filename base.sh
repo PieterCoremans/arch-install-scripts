@@ -104,13 +104,14 @@ packages=(networkmanager grub cups alsa-utils openssh rsync network-manager-appl
 #video="intel" #change to amd if amd gpu, or nvidia for nvidia gpu
 
 graphics_install (){
-read -p "Do you have an/a 1)intel, 2)amd or 3)nvidia gpu (type 1, 2 or 3)?" graphics
+        read -p "Do you have an/a 1)intel, 2)amd or 3)nvidia gpu or 4)Don't know (type 1, 2, 3 or 4)?" graphics
 
 case $graphics in 
         1) video="intel" && echo "intel selected";;
         2) video="amd" && echo "amd selected";;
         3) video="nvidia" && echo "nvidia selected";;
-        *) echo "Please type 1, 2 or 3" && graphics_install;;
+        4) video="dontknow" && echo "Don't know selected";;
+        *) echo "Please type 1, 2, 3 or 4" && graphics_install;;
 esac
 }
 
@@ -155,6 +156,7 @@ case $video in
         intel) pacman -S --noconfirm xf86-video-intel;;
         amd) pacman -S --noconfirm xf86-video-amdgpu;;
         nvidia) pacman -S --noconfirm nvidia nvidia-utils nvidia-settings;;
+        dontknow) pacman -S --noconfirm xf86-video-vesa xf86-video-ati xf86-video-intel xf86-video-amdgpu xf86-video-nouveau;;
         *) echo "no valid variable selected";;
 esac
 
@@ -164,7 +166,7 @@ sleep 2s
 
 case $install_type in
         bios) grub-install $bios_install_disk;;
-        uefi) grub-install --target=x86_64-efi --efi-directory=$uefi_mount --bootloader-id=GRUB;; 
+        uefi) pacman -S --noconfirm efibootmgr && grub-install --target=x86_64-efi --efi-directory=$uefi_mount --bootloader-id=GRUB;; 
         *) echo "no variable selected";;
 esac
 
