@@ -28,6 +28,19 @@ esac
 }
 
 run_script
+sleep 1s
+
+#removable_install (){
+#read -p "Do you want to install on a removalbe usb drive?" remove_choice
+#
+#case $remove_choice in
+        #yes) mkdir /etc/systemd/journald.conf.d && cd /etc/systemd/journald.conf.d && echo "[Journal]" > usbstick.conf && echo "Storage=volatile" >> usbstick.conf && echo "RuntimeMaxUse=30M" >> usbstick.conf;;
+        #no) echo "no removable drive";;
+        #*) echo "Please type yes or no" && removable_install;;
+#esac
+#}
+#
+#removable_install
 
 ############
 #Run script#
@@ -63,6 +76,7 @@ esac
 }
 
 reset_folders
+sleep 1s
 
 printf "\e[1;32mDeleting .config and .local folders if they exist.
 \e[0m"
@@ -90,6 +104,7 @@ esac
 }
 
 git_dwnlds
+sleep 1s
 
 printf "\e[1;32mCloning .config folder and making links.
 \e[0m"
@@ -127,6 +142,10 @@ cd ..
 git clone https://github.com/PieterCoremans/dmenu.git
 cd dmenu
 make && sudo make install
+
+printf "\e[1;32mInstalling Brillo (screen brightness controller).
+\e[0m"
+sleep 2s
 
 git clone https://gitlab.com/cameronnemo/brillo.git
 cd brillo
