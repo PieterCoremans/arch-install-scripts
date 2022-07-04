@@ -30,11 +30,7 @@ Than run the script by typing:
 Follow the instruction when prompted.
 
 ##Dwm.sh
-<<<<<<< HEAD
 When logged in as the non-root user, go again into the arch-install-scripts directory and if necessary, make dwm.sh executable by typing:
-=======
-When logged in as the non-root user, go again insto the arch-install-scripts directory and if necessary, make dwm.sh executable by typing:
->>>>>>> d1ddfe1266b1ddd432ee06c129c1b78f140ba351
 chmod +x dwm.sh
 
 Than run the script by typing:
@@ -42,14 +38,7 @@ Than run the script by typing:
 Follow the instruction when prompted.
 
 ##Notes
-<<<<<<< HEAD
 These script have been written for a French Azerty keyboard layout with the option to switch to a Belgian Azerty layout. If you do not have either of these layouts, you will need to change some settings within these scripts, the xinitrc file  as well as in the dwm config.h file, most notably regarding the tags hotkeys.
 
 ##Caveat
 I have written these script for personal use. I cannot be held responsible for any unwanted results that follow from you running these scripts on any of your machines. I highly encourage you to have some knowledge of intalling Arch linux and to read through these scripts before running them on your machine.
-=======
-These script have been written for a French Azerty keyboard layout with the option to switch to a Belgian Azerty layout. If you do not have either of these layouts, you will need to change some settings within these scripts as well as in the dwm config.h file, most notably regarding the tags hotkeys.
-
-##Caveat
-I have written these script for personal use. I cannot be held responsible for any unwanted results that follow from you using these scripts on any of your machines. I highly encourage you to have some knowledge of intalling Arch linux and to read through these scripts before running them on your machine.
->>>>>>> d1ddfe1266b1ddd432ee06c129c1b78f140ba351
