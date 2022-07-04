@@ -88,7 +88,7 @@ esac
 boot_install
 
 removable_install (){
-read -p "Do you want to install on a removalbe usb drive?" remove_choice
+read -p "Do you want to install on a removable usb drive (yes/no)?" remove_choice
 
 case $remove_choice in
         yes) cp /etc/mkinitcpio.conf /etc/mkinitcpio.conf.orig && cat /etc/mkinitcpio.conf | grep -v "^#" | sed s/autodetect/"block keyboard autodetect"/ | sed s/"block filesystems keyboard"/filesystems/ > /etc/mkinitcpio.conf && mkinitcpio -p linux;;
@@ -216,7 +216,7 @@ echo "Defaults !tty_tickets" >> /etc/sudoers
 
 ram_journal (){
 case $remove_choice in
-        yes) echo "login as user: give user password" && su - $name_user && mkdir /etc/systemd/journald.conf.d && cd /etc/systemd/journald.conf.d && echo "[Journal]" > usbstick.conf && echo "Storage=volatile" >> usbstick.conf && echo "RuntimeMaxUse=30M" >> usbstick.conf && echo "login as root: give root password if prompted" && exit;;
+        yes) mkdir /etc/systemd/journald.conf.d && cd /etc/systemd/journald.conf.d && echo "[Journal]" > usbstick.conf && echo "Storage=volatile" >> usbstick.conf && echo "RuntimeMaxUse=30M" >> usbstick.conf ;;
         no) echo "no removable drive -> moving on";;
         *) echo "No valid option was chosen";;
 esac
