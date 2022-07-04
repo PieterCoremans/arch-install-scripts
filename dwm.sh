@@ -23,18 +23,6 @@ esac
 run_script
 sleep 1s
 
-#removable_install (){
-#read -p "Do you want to install on a removalbe usb drive?" remove_choice
-#
-#case $remove_choice in
-        #yes) mkdir /etc/systemd/journald.conf.d && cd /etc/systemd/journald.conf.d && echo "[Journal]" > usbstick.conf && echo "Storage=volatile" >> usbstick.conf && echo "RuntimeMaxUse=30M" >> usbstick.conf;;
-        #no) echo "no removable drive";;
-        #*) echo "Please type yes or no" && removable_install;;
-#esac
-#}
-#
-#removable_install
-
 ############
 #Run script#
 ############

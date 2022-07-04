@@ -31,11 +31,6 @@ sleep 2s
 
 timezone="/Europe/Brussels"
 
-#passwords of root and user
-#password_root="password"
-#name_user="pieter"
-#password_user="password"
-
 set_root_password (){
 read -sp "Type root password: " password_root; echo -e "\n"
 read -sp "Retype root password: " password_root_check; echo -e "\n"
@@ -67,11 +62,6 @@ do
         set_user_password
 done
 unset password_user_check
-
-#grub-install uefi or bios
-#install_type="bios" #change to uefi when needed
-#uefi_mount="/boot/efi" #not used if bios
-#bios_install_disk="/dev/sdx" #not used if uefi
 
 lsblk
 
@@ -168,7 +158,7 @@ case $video in
         intel) pacman -S --noconfirm xf86-video-intel;;
         amd) pacman -S --noconfirm xf86-video-amdgpu;;
         nvidia) pacman -S --noconfirm nvidia nvidia-utils nvidia-settings;;
-        dontknow) pacman -S --noconfirm xf86-video-vesa xf86-video-ati xf86-video-intel xf86-video-amdgpu xf86-video-nouveau;;
+        dontknow) pacman -S --noconfirm xf86-video-intel xf86-video-amdgpu nvidia nvidia-utils nvidia-settings;;
         *) echo "no valid variable selected";;
 esac
 
@@ -198,12 +188,6 @@ done
 #User
 printf "\e[1;32mSetting user settings.\e[0m"
 sleep 2s
-
-#Original user management
-#useradd -m pieter
-#echo pieter:password | chpasswd
-#usermod -aG libvirt pieter
-#echo "pieter ALL=(ALL) ALL" >> /etc/sudoers.d/pieter
 
 #alternative user management
 useradd -mg wheel $name_user
