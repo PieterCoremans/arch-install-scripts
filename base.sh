@@ -7,18 +7,8 @@
 printf "\e[1;32mHello there!
 
 This script will perform a base install of Arch Linux. 
-Before continuing, make sure you performed the following steps:
+Before continuing, make sure you performed the preliminary steps as outlined in the README file.
 \e[0m"
-
-echo -e \
-"1) checked internet acces and ran loadkeys be-latin1 for Belgian layout
-2) ran 'timedatectl set-ntp true'
-3) partitioned the drives and mounted them
-4) ran 'pactrap /mnt base base-devel linux linux-firmware vim git
-5) ran 'genfstab -U /mnt >> /mnt/etc/fstab
-6) ran 'arch-chroot /mnt /bin/bash'. This will put you in system root
-
-"
 
 run_script (){
 read -p "Did you run these steps (yes/no)?" ran_prelim
@@ -89,13 +79,35 @@ boot_install (){
 read -p "Do you want to install 1)bios or 2)uefi (type 1 or 2)?" install_choice
 
 case $install_choice in 
-        1) install_type="bios" && echo "bios selected" && read -p "Type install disk (e.g. /dev/sda): " bios_install_disk;;
-        2) install_type="uefi" && echo "uefi selected" && read -p "Type uefi mount point (e.g. /boot/efi): " uefi_mount;;
+        1) echo "bios selected" && read -p "Type install disk (e.g. /dev/sda): " bios_install_disk;;
+        2) echo "uefi selected" && read -p "Type uefi mount point (e.g. /boot/efi): " uefi_mount;;
         *) echo "Please type 1 for bios or 2 for uefi" && boot_install;;
 esac
 }
 
 boot_install
+
+removable_install (){
+read -p "Do you want to install on a removalbe usb drive?" remove_choice
+
+case $remove_choice in
+        yes) cp /etc/mkinitcpio.conf /etc/mkinitcpio.conf.orig && cat /etc/mkinitcpio.conf | grep -v "^#" | sed s/autodetect/"block keyboard autodetect"/ | sed s/"block filesystems keyboard"/filesystems/ > /etc/mkinitcpio.conf && mkinitcpio -p linux;;
+        no) echo "no removable drive";;
+        *) echo "Please type yes or no" && removable_install;;
+esac
+}
+
+removable_install
+
+if [ $install_choice = 1 ] && [ $remove_choice = "yes" ]; then
+        install_type="bios_remove"
+elif [ $install_choice = 1 ] && [ $remove_choice = "no" ]; then
+        install_type="bios_noremove"
+elif [ $install_choice = 2 ] && [ $remove_choice = "yes" ]; then
+        install_type="uefi_remove"
+else 
+        install_type="uefi_noremove"
+fi
 
 #specific packages in the pacman command
 packages=(networkmanager grub cups alsa-utils openssh rsync network-manager-applet reflector linux-headers) 
@@ -165,8 +177,10 @@ printf "\e[1;32mInstalling GRUB.\e[0m"
 sleep 2s
 
 case $install_type in
-        bios) grub-install $bios_install_disk;;
-        uefi) pacman -S --noconfirm efibootmgr && grub-install --target=x86_64-efi --efi-directory=$uefi_mount --bootloader-id=GRUB;; 
+        bios_noremove) grub-install $bios_install_disk;;
+        uefi_noremove) pacman -S --noconfirm efibootmgr && grub-install --target=x86_64-efi --efi-directory=$uefi_mount --bootloader-id=GRUB;; 
+        bios_remove) grub-install $bios_install_disk --removable --recheck;;
+        uefi_remove) pacman -S --noconfirm efibootmgr && grub-install --target=x86_64-efi --efi-directory=$uefi_mount --bootloader-id=GRUBi --removable --recheck;; 
         *) echo "no variable selected";;
 esac
 
@@ -198,9 +212,21 @@ echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 echo "%wheel ALL=(ALL) NOPASSWD:/home/${name_user}/.local/bin/" >> /etc/sudoers
 echo "Defaults !tty_tickets" >> /etc/sudoers
 
+#if chosen for removable option, create file for RAM journalling
+
+ram_journal (){
+case $remove_choice in
+        yes) echo "login as user: give user password" && su - $name_user && mkdir /etc/systemd/journald.conf.d && cd /etc/systemd/journald.conf.d && echo "[Journal]" > usbstick.conf && echo "Storage=volatile" >> usbstick.conf && echo "RuntimeMaxUse=30M" >> usbstick.conf && echo "login as root: give root password if prompted" && exit;;
+        no) echo "no removable drive -> moving on";;
+        *) echo "No valid option was chosen";;
+esac
+}
+
+ram_journal
+
+#move install scripts to user home folder
 cd /
 mv arch-install-scripts /home/${name_user}/
 
-printf "\e[1;32mDone! Type exit, umount -R /mnt  and reboot.\e[0m"
+printf "\e[1;32mDone! Type exit, umount -R /mnt and reboot. After rebooting, login as the non-root user and prceed with the installation as described in the README.\e[0m"
 
-# After this, you can login as user and proceed with the user specific installation
