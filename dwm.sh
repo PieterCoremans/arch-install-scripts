@@ -10,8 +10,6 @@ This script will install all the .config files and .local files for a functionin
 Before running this script, make sure that you already ran base.sh and read the instructions in the README.
 \e[0m"
 
-"
- 
 run_script (){
 read -p "Are you shure you want to continue (yes/no)?" ran_prelim
 

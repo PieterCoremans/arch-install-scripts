@@ -228,5 +228,6 @@ ram_journal
 cd /
 mv arch-install-scripts /home/${name_user}/
 
-printf "\e[1;32mDone! Type exit, umount -R /mnt and reboot. After rebooting, login as the non-root user and prceed with the installation as described in the README.\e[0m"
+printf "\e[1;32mDone! Type exit, umount -R /mnt and reboot. After rebooting, login as the non-root user and prceed with the installation as described in the README.
+\e[0m"
 
