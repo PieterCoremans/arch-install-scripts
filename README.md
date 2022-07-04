@@ -1,11 +1,11 @@
-#Scripts to install my config of Arch Linux DWM
+# Scripts to install my config of Arch Linux DWM
 Note: this is a project in test phase. Therefore, many features may not yet work.
 
-##Scripts
+## Scripts
 This repo contains 2 scripts: base.sh and dwm.sh.
 The idea is to first follow perform some premilinary steps until you have chrooted into the install. After that, run base.sh, reboot, login as the non-root user and run dwm.sh.
 
-##Preliminary steps
+## Preliminary steps
 Before running the scripts, you should follow the following steps.
 - Boot from a usb stick with the Arch Linux iso on it.
 - Set your console keyboard layout. This only applies to non-US layouts. For Belgian layout type: loadkeys be-latin1
@@ -16,12 +16,12 @@ Before running the scripts, you should follow the following steps.
 - Run 'genfstab -U /mnt >> /mnt/etc/fstab'
 - Run 'arch-chroot /mnt /bin/bash'. This will put you in system root.
 
-##Git clone this repo
+## Git clone this repo
 Once chrooted into the install. Run the following command.
 git clone https://github.com/PieterCoremans/arch-install-scripts.git
 cd arch-install-scripts
 
-##Base.sh
+## Base.sh
 If necessary, make base.sh executable by typing:
 chmod +x base.sh
 
@@ -29,15 +29,15 @@ Than run the script by typing:
 ./base.sh
 Follow the instruction when prompted.
 
-##Dwm.sh
+## Dwm.sh
 When logged in as the non-root user, go again into the arch-install-scripts directory and if necessary, make dwm.sh executable by typing:
-chmod +x dwm.sh
+sudo chmod +x dwm.sh
 
 Than run the script by typing:
 ./dwm.sh
 Follow the instruction when prompted.
 
-##Notes
+## Notes
 These script have been written for a French Azerty keyboard layout with the option to switch to a Belgian Azerty layout. If you do not have either of these layouts, you will need to change some settings within these scripts, the xinitrc file  as well as in the dwm config.h file, most notably regarding the tags hotkeys.
 
 ##Caveat

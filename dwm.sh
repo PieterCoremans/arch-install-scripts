@@ -7,13 +7,8 @@
 printf "\e[1;32mHello there again!
 
 This script will install all the .config files and .local files for a functioning dwm install
-Before running this script:
+Before running this script, make sure that you already ran base.sh and read the instructions in the README.
 \e[0m"
-
-echo -e \
-"1) make sure you already ran base.sh with the prerequisites for that script
-2) read through the script and adapt what's needed
-3) make this file executable with chmod +x
 
 "
  
