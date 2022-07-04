@@ -42,7 +42,7 @@ printf "\e[1;32mInstalling pacman packages.
 \e[0m"
 sleep 2s
 
-sudo pacman -S xorg-server xorg-xinit xorg-xrandr xorg-xsetroot git firefox pcmanfm slock sxiv nitrogen picom ranger neofetch imagemagick htop gvim cmatrix alacritty go-md2man
+sudo pacman -S xorg-server xorg-xinit xorg-xrandr xorg-xsetroot git firefox pcmanfm slock sxiv nitrogen picom ranger neofetch imagemagick htop gvim cmatrix alacritty yad go-md2man
 
 #Reset home folders
 reset_folders (){
