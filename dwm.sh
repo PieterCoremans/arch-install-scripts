@@ -141,5 +141,5 @@ sleep 2s
 
 git clone https://github.com/PieterCoremans/local.git .local
 
-printf "\e[1;32mDWM and other utilities have now been installed! Reboot to login into your new window manager :)!.
+printf "\e[1;32mDWM and other utilities have now been installed! Reboot, login as the non-root user and start DWM with the startx command :)!.
 \e[0m"

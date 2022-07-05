@@ -145,13 +145,15 @@ echo "127.0.0.1 arch.localdomain arch" >> /etc/hosts
 echo root:$password_root | chpasswd
 
 #Pacman packages
-printf "\e[1;32mInstalling pacman packages.\e[0m"
+printf "\e[1;32mInstalling pacman packages.
+\e[0m"
 sleep 2s
 
 pacman -S --noconfirm ${packages[@]}
 
 #Video drivers
-printf "\e[1;32mInstalling video drivers.\e[0m"
+printf "\e[1;32mInstalling video drivers.
+\e[0m"
 sleep 2s
 
 case $video in
@@ -163,7 +165,8 @@ case $video in
 esac
 
 #GRUB
-printf "\e[1;32mInstalling GRUB.\e[0m"
+printf "\e[1;32mInstalling GRUB.
+\e[0m"
 sleep 2s
 
 case $install_type in
@@ -177,7 +180,8 @@ esac
 grub-mkconfig -o /boot/grub/grub.cfg
 
 #Systemd
-printf "\e[1;32mEnabling systemctl configuration.\e[0m"
+printf "\e[1;32mEnabling systemctl configuration.
+\e[0m"
 sleep 2s
 
 for x in ${sys_stuff[@]}
@@ -186,7 +190,8 @@ do
 done
 
 #User
-printf "\e[1;32mSetting user settings.\e[0m"
+printf "\e[1;32mSetting user settings.
+\e[0m"
 sleep 2s
 
 #alternative user management
@@ -212,6 +217,6 @@ ram_journal
 cd /
 mv arch-install-scripts /home/${name_user}/
 
-printf "\e[1;32mDone! Type exit, umount -R /mnt and reboot. After rebooting, login as the non-root user and prceed with the installation as described in the README.
+printf "\e[1;32mDone! Type exit, then umount -R /mnt and reboot. After rebooting, login as the non-root user and prceed with the installation as described in the README.
 \e[0m"
 
