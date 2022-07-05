@@ -50,13 +50,17 @@ Than run the script by typing:
 Follow the instruction when prompted.
 
 ## Notes
+
+### Keyboard layout
 These script have been written for a French Azerty keyboard layout with the option to switch to a Belgian Azerty layout. If you do not have either of these layouts, you will need to change some settings within these scripts, the xinitrc file  as well as in the dwm config.h file, most notably regarding the tags hotkeys.
 
-If you install on Virtualbox, perform the following steps after install and login to get full screen:
-1) sudo pacman -S virtualbox-guest-utils
-2) systemctl enable vboxservice.service
-3) reboot the system
-4) after reboot and login: in Virtualbox -> view -> auto-resize guest display
+### VirtualBox full screen
+If you install on VirtualBox, perform the following steps after install and login to get full screen:
+```
+sudo pacman -S virtualbox-guest-utils
+systemctl enable vboxservice.service
+```
+After rebooting, select View -> Auto-resize Guest Display
 
-##Caveat
+## Caveat
 I have written these script for personal use. I cannot be held responsible for any unwanted results that follow from you running these scripts on any of your machines. I highly encourage you to have some knowledge of intalling Arch linux and to read through these scripts before running them on your machine.
