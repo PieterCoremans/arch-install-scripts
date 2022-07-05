@@ -81,7 +81,7 @@ removable_install (){
 read -p "Do you want to install on a removable usb drive (yes/no)?" remove_choice
 
 case $remove_choice in
-        yes) cp /etc/mkinitcpio.conf /etc/mkinitcpio.conf.orig && cat /etc/mkinitcpio.conf | grep -v "^#" | sed s/autodetect/"block keyboard autodetect"/ | sed s/"block filesystems keyboard"/filesystems/ > /etc/mkinitcpio.conf && mkinitcpio -p linux;;
+        yes) mv /etc/mkinitcpio.conf /etc/mkinitcpio.conf.orig && cat /etc/mkinitcpio.conf.orig | grep -v "^#" | sed s/"autodetect"/"block keyboard autodetect"/ | sed s/"block filesystems keyboard"/"filesystems"/ > /etc/mkinitcpio.conf && mkinitcpio -p linux;;
         no) echo "no removable drive";;
         *) echo "Please type yes or no" && removable_install;;
 esac
@@ -128,7 +128,8 @@ sys_stuff=(NetworkManager)
 ##############
 
 #General
-printf "\e[1;32mSetting locale settings, hostname and root password.\e[0m"
+printf "\e[1;32mSetting locale settings, hostname and root password.
+\e[0m"
 sleep 2s
 
 ln -sf /usr/share/zoneinfo/$timezone /etc/localtime
@@ -173,7 +174,7 @@ case $install_type in
         bios_noremove) grub-install $bios_install_disk;;
         uefi_noremove) pacman -S --noconfirm efibootmgr && grub-install --target=x86_64-efi --efi-directory=$uefi_mount --bootloader-id=GRUB;; 
         bios_remove) grub-install $bios_install_disk --removable --recheck;;
-        uefi_remove) pacman -S --noconfirm efibootmgr && grub-install --target=x86_64-efi --efi-directory=$uefi_mount --bootloader-id=GRUBi --removable --recheck;; 
+        uefi_remove) pacman -S --noconfirm efibootmgr && grub-install --target=x86_64-efi --efi-directory=$uefi_mount --bootloader-id=GRUB --removable --recheck;; 
         *) echo "no variable selected";;
 esac
 
