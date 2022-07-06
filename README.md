@@ -11,7 +11,26 @@ Before running the scripts, you should follow the following steps.
 - Set your console keyboard layout. This only applies to non-US layouts. For Belgian layout type: `loadkeys be-latin1`
 - Check your internet connection with e.g. `ping archlinux.org`. You can quit out of that with Ctrl+c. Use ethernet if possible to avoid problems.
 - Run `timedatectl set-ntp true` (not sure if really needed though)
-- Partition the drives and mount them. There are many ways of doing this (MBR or GPT, swap or no swap, separate home partition or not, ...). If you are installing on a removable usb drive, do not forget to use the `-O "^has_journal"` flag (after the mkfs command and before the device name). If you later specify that you are installing on a removable device in the base.sh script, journalling will be configured to use RAM instead of the drive itself. For the rest of the process, we assume that you mount the root filesystem to /mnt.
+- Create partitions, format and mount them. There are many ways of doing this (MBR or GPT, swap or no swap, separate home partition or not, ...). For the rest of the process, we assume that you mount the root filesystem to /mnt.
+Some usefull guidelines for formatting the partitions:
+    - Swap
+```
+mkswap /dev/sdxn
+swapon /dev/sdxn
+```
+    - Boot partition for uefi
+```
+mkfs.fat -F32 /dev/sdxm
+```
+    - Root partition
+```
+mkfs.ext4 /dev/sdxp
+```
+    - Root partition removable
+```
+mkfs.ext4 -0 "^has_journal" /dev/sdxp
+```If you later specify that you are installing on a removable device in the base.sh script, journalling will be configured to use RAM instead of the drive itself. 
+
 - Run the following commands to install linux, create the fstab file and change root into the installed system:
 ```
 pacstrap /mnt base base-devel linux linux-firmware vim git
@@ -64,3 +83,14 @@ After rebooting, select View -> Auto-resize Guest Display
 
 ## Caveat
 I have written these script for personal use. I cannot be held responsible for any unwanted results that follow from you running these scripts on any of your machines. I highly encourage you to have some knowledge of intalling Arch linux and to read through these scripts before running them on your machine.
+
+## Installation on USB stick: disable KMS
+If installing on a removable drive, and after rebooting after running base.sh, you get stuck during boot (i.e. you do not get to the point where you can login) an additional step might be neccesary.
+Boot back into the Arch iso, mount the intall boot partition to /mnt and arch-chroot into the install like you did before. Then:
+```
+vim /etc/default/grub
+```
+and add `nomodeset` after `quiet` within the quotation mark. After that, regeneration the grub configuration file:
+```
+grub-mkconfig -o /boot/grub/grub.cfg
+```
