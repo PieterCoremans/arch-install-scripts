@@ -199,7 +199,7 @@ sleep 2s
 useradd -mg wheel $name_user
 echo ${name_user}:$password_user | chpasswd
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
-echo "%wheel ALL=(ALL) NOPASSWD:/home/${name_user}/.local/bin/" >> /etc/sudoers
+echo "%wheel ALL=(ALL) NOPASSWD:/home/${name_user}/.local/bin/shutdown_prompt" >> /etc/sudoers
 echo "Defaults !tty_tickets" >> /etc/sudoers
 
 #if chosen for removable option, create file for RAM journalling
