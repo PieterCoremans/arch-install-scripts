@@ -15,24 +15,22 @@ Before running the scripts, you should follow the following steps.
 Some usefull guidelines for formatting the partitions:
 
    - Swap
-```
-mkswap /dev/sdxn
-swapon /dev/sdxn
-```
-
+   ```
+   mkswap /dev/sdxn
+   swapon /dev/sdxn
+   ```
    - Boot partition for uefi
-```
-mkfs.fat -F32 /dev/sdxm
-```
-
+   ```
+   mkfs.fat -F32 /dev/sdxm
+   ```
    - Root partition
-```
-mkfs.ext4 /dev/sdxp
-```
+   ```
+   mkfs.ext4 /dev/sdxp
+   ```
    - Root partition removable
-```
-mkfs.ext4 -0 "^has_journal" /dev/sdxp
-```
+   ```
+   mkfs.ext4 -0 "^has_journal" /dev/sdxp
+   ```
 
 If you later specify that you are installing on a removable device in the base.sh script, journalling will be configured to use RAM instead of the drive itself. 
 
