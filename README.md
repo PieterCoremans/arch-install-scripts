@@ -14,7 +14,7 @@ Before running the scripts, you should follow the following steps.
 - Create partitions, format and mount them. There are many ways of doing this (MBR or GPT, swap or no swap, separate home partition or not, ...). For the rest of the process, we assume that you mount the root filesystem to /mnt.
 Some usefull guidelines for formatting the partitions:
 
-   -Swap
+   - Swap
 ```
 mkswap /dev/sdxn
 swapon /dev/sdxn
