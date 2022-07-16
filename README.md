@@ -14,25 +14,25 @@ Before running the scripts, you should follow the following steps.
 - Create partitions, format and mount them. There are many ways of doing this (MBR or GPT, swap or no swap, separate home partition or not, ...). For the rest of the process, we assume that you mount the root filesystem to /mnt.
 Some usefull guidelines for formatting the partitions:
 
-    - Swap
+   - Swap
 ```
 mkswap /dev/sdxn
 swapon /dev/sdxn
 ```
 
-    - Boot partition for uefi
+   - Boot partition for uefi
 
 ```
 mkfs.fat -F32 /dev/sdxm
 ```
 
-    - Root partition
+   - Root partition
 
 ```
 mkfs.ext4 /dev/sdxp
 ```
 
-    - Root partition removable
+   - Root partition removable
 ```
 mkfs.ext4 -0 "^has_journal" /dev/sdxp
 ```
