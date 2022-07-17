@@ -11,7 +11,7 @@ Before running the scripts, you should follow the following steps.
 - Set your console keyboard layout. This only applies to non-US layouts. For Belgian layout type: `loadkeys be-latin1`
 - Check your internet connection with e.g. `ping archlinux.org`. You can quit out of that with Ctrl+c. Use ethernet if possible to avoid problems.
 - Run `timedatectl set-ntp true` (not sure if really needed though)
-- Create partitions, format and mount them. There are many ways of doing this (MBR or GPT, swap or no swap, separate home partition or not, ...). For the rest of the process, we assume that you mount the root filesystem to /mnt.
+- Create partitions, format and mount them. There are many ways of doing this (MBR or GPT, swap or no swap, separate home partition or not, ...) using gdisk, cgdisk, fdisk or cfdisk. For the rest of the process, we assume that you mount the root filesystem to /mnt.
 Some usefull guidelines for formatting the partitions:
 
    - Swap
@@ -22,17 +22,29 @@ Some usefull guidelines for formatting the partitions:
    - Boot partition for uefi
    ```
    mkfs.fat -F32 /dev/sdxm
+   mkdir /mnt/boot/efi
+   mount /dev/sdxm /mnt/boot/efi
    ```
    - Root partition
    ```
    mkfs.ext4 /dev/sdxp
+   mount /dev/sdxp /mnt
    ```
    - Root partition removable
    ```
    mkfs.ext4 -0 "^has_journal" /dev/sdxp
+   mount /dev/sdxp /mnt
+   ```
+   
+   If you later specify that you are installing on a removable device in the base.sh script, journalling will be configured to use RAM instead of the drive itself. 
+   
+   - Home partition
+   ```
+   mkfs.ext4 /dev/sdxq
+   mkdir /mnt/home
+   mount /dev/sdxq /mnt/home
    ```
 
-If you later specify that you are installing on a removable device in the base.sh script, journalling will be configured to use RAM instead of the drive itself. 
 
 - Run the following commands to install linux, create the fstab file and change root into the installed system:
 ```
