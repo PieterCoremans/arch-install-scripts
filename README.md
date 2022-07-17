@@ -9,6 +9,7 @@ The idea is to first follow perform some premilinary steps until you have chroot
 Before running the scripts, you should follow the following steps.
 - Boot from a usb stick with the Arch Linux iso on it.
 - Set your console keyboard layout. This only applies to non-US layouts. For Belgian layout type: `loadkeys be-latin1`
+- If the font is to small type: `setfont ter-132n`
 - Check your internet connection with e.g. `ping archlinux.org`. You can quit out of that with Ctrl+c. Use ethernet if possible to avoid problems.
 - Run `timedatectl set-ntp true` (not sure if really needed though)
 - Create partitions, format and mount them. There are many ways of doing this (MBR or GPT, swap or no swap, separate home partition or not, ...) using gdisk, cgdisk, fdisk or cfdisk. For the rest of the process, we assume that you mount the root filesystem to /mnt.
