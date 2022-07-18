@@ -1,5 +1,5 @@
 # Scripts to install my config of Arch Linux DWM
-Note: this is a project in test phase. Therefore, many features may not yet work.
+Note: this is a project in test phase. Therefore, some features may not yet work.
 
 ## Scripts
 This repo contains 2 scripts: base.sh and dwm.sh.
@@ -96,9 +96,6 @@ sudo pacman -S virtualbox-guest-utils
 systemctl enable vboxservice.service
 ```
 After rebooting, select View -> Auto-resize Guest Display
-
-## Caveat
-I have written these script for personal use. I cannot be held responsible for any unwanted results that follow from you running these scripts on any of your machines. I highly encourage you to have some knowledge of intalling Arch linux and to read through these scripts before running them on your machine.
 
 ## Installation on USB stick: disable KMS
 If installing on a removable drive, and after rebooting after running base.sh, you get stuck during boot (i.e. you do not get to the point where you can login) an additional step might be neccesary.
