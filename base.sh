@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Copyright Pieter Coremans 2022. Licensed under the EUPL-1.2 or later
+
+# This script installs a base installation of Arch Linux with a non-root user, given the performance of the preliminary steps.
+
 ###################
 #Preliminary steps#
 ###################
